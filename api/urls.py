@@ -1,21 +1,24 @@
-"""api URL Configuration
+from django.conf.urls import url, include
+from rest_framework.urlpatterns import format_suffix_patterns
+from .views import (
+    UserView,
+    UserDetailsView,
+    ProductImagesView,
+    ProductImageView,
+    ProductsView,
+    ProductView)
+from rest_framework.authtoken.views import obtain_auth_token
+from django.views.generic import RedirectView
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url
-from django.contrib import admin
+urlpatterns = {
+    url(r'^images/$', ProductImagesView.as_view(), name="productimages"),
+    url(r'^images/(?P<pk>[0-9]+)/$', ProductImageView.as_view(), name="productimage"),
+    url(r'^products/$', ProductsView.as_view(), name="products"),
+    url(r'^products/(?P<pk>[0-9]+)/$', ProductView.as_view(), name="product"),
+    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^users/$', UserView.as_view(), name="users"),
+    url(r'^users/(?P<pk>[0-9]+)/$', UserDetailsView.as_view(), name="user_details"),
+    url(r'^get-token/', obtain_auth_token),
+}
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
+urlpatterns = format_suffix_patterns(urlpatterns)
