@@ -20,8 +20,8 @@ class Product(models.Model):
         return "{}".format(self.name_en)
 
 class ProductImage(models.Model):
-    owner = models.ForeignKey(User, related_name='productimages', on_delete=models.CASCADE)
-    productId = models.ForeignKey(Product, related_name='productimages', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='product_images', on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, related_name='product_images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images')
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

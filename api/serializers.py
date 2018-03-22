@@ -6,16 +6,16 @@ from django.contrib.auth.models import User
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = ('id', 'owner', 'productId', 'image', 'date_created', 'date_modified')
+        fields = ('id', 'owner', 'product_id', 'image', 'date_created', 'date_modified')
         read_only_fields = ('date_created', 'date_modified')
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    productimages = ProductImageSerializer(many=True, read_only=True)
+    product_images = ProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ('id', 'owner', 'name_et', 'name_en', 'description_et', 'description_en', 'productimages')
+        fields = ('id', 'owner', 'name_et', 'name_en', 'description_et', 'description_en', 'product_images')
         read_only_fields = ('date_created', 'date_modified')
 
 class UserSerializer(serializers.ModelSerializer):

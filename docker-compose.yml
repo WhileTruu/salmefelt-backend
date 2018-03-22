@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     ports:
-      - "8001:5432"
+      - "5432"
   web:
     env_file: .env
     build: .
@@ -15,4 +15,3 @@ services:
       - "8000:8000"
     depends_on:
       - db
-

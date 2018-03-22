@@ -11,7 +11,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from django.views.generic import RedirectView
 
 urlpatterns = {
-    url(r'^images/$', ProductImagesView.as_view(), name="productimages"),
+    url(r'^images/$', ProductImagesView.as_view(), name="product_images"),
     url(r'^images/(?P<pk>[0-9]+)/$', ProductImageView.as_view(), name="productimage"),
     url(r'^products/$', ProductsView.as_view(), name="products"),
     url(r'^products/(?P<pk>[0-9]+)/$', ProductView.as_view(), name="product"),
