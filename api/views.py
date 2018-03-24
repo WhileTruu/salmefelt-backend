@@ -12,7 +12,7 @@ class ProductImagesView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
+        """Save the post data when creating new productImages."""
         if not serializer.is_valid():
             raise ValidationError(serializer.errors)
         serializer.save(owner=self.request.user)
@@ -25,7 +25,7 @@ class ProductImageView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def perform_update(self, serializer):
-        """Save the post data when creating a new bucketlist."""
+        """Save the post data when creating a new productImage."""
         if not serializer.is_valid():
             raise ValidationError(serializer.errors)
         serializer.save(owner=self.request.user)
@@ -38,7 +38,7 @@ class ProductsView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
+        """Save the post data when creating a new product."""
         if not serializer.is_valid():
             raise ValidationError(serializer.errors)
         serializer.save(owner=self.request.user)
@@ -51,7 +51,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def perform_update(self, serializer):
-        """Save the post data when creating a new bucketlist."""
+        """Save the post data when creating a new product."""
         if not serializer.is_valid():
             raise ValidationError(serializer.errors)
         serializer.save(owner=self.request.user)
