@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, ResizeToFit, ResizeToCover
 
 class Product(models.Model):
     def get_default_position():
@@ -53,7 +55,16 @@ class Product(models.Model):
 class ProductImage(models.Model):
     owner = models.ForeignKey(User, related_name='product_images', on_delete=models.CASCADE, blank=False)
     product_id = models.ForeignKey(Product, related_name='product_images', on_delete=models.CASCADE, blank=False)
-    image = models.ImageField(upload_to='images', blank=False)
+    full_size = models.ImageField(upload_to='images', blank=False)
+    optimized = ImageSpecField(source='full_size',
+        processors=[ResizeToFit(800, 800)],
+        format='JPEG',
+        options={'quality': 80})
+    thumbnail = ImageSpecField(source='full_size',
+        processors=[ResizeToFill(400, 400)],
+        format='JPEG',
+        options={'quality': 60})
+
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 

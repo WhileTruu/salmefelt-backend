@@ -43,6 +43,10 @@ REST_FRAMEWORK = {
     ),
 }
 
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema' # Where your Graphene schema lives
+}
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'graphene_django',
     'api',
 ]
 
@@ -136,6 +141,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20000000
+FILE_UPLOAD_PERMISSIONS  = 0o644
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

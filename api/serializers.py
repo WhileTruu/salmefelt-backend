@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
-    path = serializers.ImageField(source='image', use_url=False)
+    full_size = serializers.ImageField(use_url=False)
+    optimized = serializers.ImageField(read_only=True, use_url=False)
+    thumbnail = serializers.ImageField(read_only=True, use_url=False)
 
     class Meta:
         model = ProductImage
-        fields = ('id', 'path')
+        fields = ('id', 'full_size', 'optimized', 'thumbnail')
         read_only_fields = ('date_created', 'date_modified')
 
 
